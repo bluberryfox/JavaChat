@@ -16,7 +16,7 @@ public class ChatServer implements TCPObserver {
         System.out.println("Server Running...");
         //слушает порт и принимает данные
         try {
-            ServerSocket serverSocket = new ServerSocket(8023);
+            ServerSocket serverSocket = new ServerSocket(8189);
             while (true) {
                 try {
                     //accept - ждет нового соединения, и когда оно приходит, возвращает объект сокета, который связан с этим соединением
@@ -60,9 +60,7 @@ public class ChatServer implements TCPObserver {
 
     private void sendMessageToAll(String message) {
         System.out.println(message);
-        for (TCPConnection connection : tcpConnections) {
-            connection.sendMessage(message);
-        }
+        tcpConnections.forEach((TCPConnection connection)->connection.sendMessage(message));
     }
 }
 
